@@ -18,6 +18,6 @@ Gem::Specification.new do |s|
   s.test_files  = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.executables = %w( ruby_patches_merger )
 
-  #s.add_development_dependency "tf"
+  s.add_development_dependency "nokogiri"
   #s.add_development_dependency "smf-gem"
 end
