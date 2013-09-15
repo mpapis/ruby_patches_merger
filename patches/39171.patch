@@ -1,0 +1,33 @@
+--- trunk/ChangeLog	2013/02/09 08:38:46	39170
++++ trunk/ChangeLog	2013/02/09 08:46:02	39171
+@@ -1,3 +1,8 @@
++Sat Feb  9 17:45:58 2013  Nobuyoshi Nakada  <nobu@ruby-lang.org>
++
++	* configure.in, version.c: prevent duplicated load paths by empty
++	  version string, it does not work right now.
++
+ Sat Feb  9 17:38:41 2013  Nobuyoshi Nakada  <nobu@ruby-lang.org>
+ 
+ 	* configure.in: fix arch parameters in help message.  [Bug #7804]
+--- trunk/configure.in	2013/02/09 08:38:46	39170
++++ trunk/configure.in	2013/02/09 08:46:02	39171
+@@ -3235,6 +3235,8 @@
+     test -f verconf.h || > verconf.h
+     ruby_version="`$CPP -I. -I"${srcdir}" -I"${srcdir}/include" conftest.c | sed '/^ruby_version=/!d;s/ //g'`"
+     eval $ruby_version
++elif test -z "${ruby_version}"; then
++    AC_MSG_ERROR([No ruby version, No place for bundled libraries])
+ else
+     RUBY_LIB_VERSION="\"${ruby_version}\""
+ fi
+--- trunk/version.c	2013/02/09 08:38:46	39170
++++ trunk/version.c	2013/02/09 08:46:02	39171
+@@ -39,6 +39,8 @@
+ #define RUBY_VENDOR_LIB RUBY_LIB_PREFIX"/vendor_ruby"
+ #endif
+ 
++typedef char ruby_lib_version_string[(int)sizeof(RUBY_LIB_VERSION) - 2];
++
+ #define RUBY_LIB                    RUBY_LIB_PREFIX  "/"RUBY_LIB_VERSION
+ #define RUBY_SITE_LIB2              RUBY_SITE_LIB    "/"RUBY_LIB_VERSION
+ #define RUBY_VENDOR_LIB2            RUBY_VENDOR_LIB  "/"RUBY_LIB_VERSION
