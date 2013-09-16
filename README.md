@@ -8,11 +8,11 @@ Help to manage ruby patches.
 
 ## Usage
 
-So far only downloading patches for revisions is implemented:
+Download patches for revisions:
 
-    ruby_patches_merger r39171,r39296,r39333,r39334
+    ruby_patches_merger download r39171,r39296,r39333,r39334
 
-Will download patches for those revisions to `patches/`, thanks to https://bugs.ruby-lang.org/issues/7959#note-16
+Will download revisions to `patches/`, thanks to https://bugs.ruby-lang.org/issues/7959#note-16
 
 ## Testing
 

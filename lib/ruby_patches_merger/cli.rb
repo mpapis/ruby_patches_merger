@@ -11,12 +11,26 @@ module RubyPatchesMerger
       @args = args.map{|arg| arg.split(/[ ,]/)}.flatten
     end
 
+    def help(message = nil)
+      puts message if message
+      puts <<HELP
+Usage: ruby_patches_merger [download|help]
+
+ - download revisions,list
+ - help
+
+HELP
+    end
+
     def run
-      if args.empty?
-        puts "No arguments given - try: ruby_patches_merger revision1 revision2,revision3"
-      else
+      case args[0]
+      when 'download'
         require 'ruby_patches_merger/revisions'
-        RubyPatchesMerger::Revisions.new(args).save_to("patches")
+        RubyPatchesMerger::Revisions.new(args[1..-1]).save_to("patches")
+      when nil, 'help', '--help'
+        help
+      else
+        help "Unknown arguments given '#{args*" "}'."
       end
     end
   end
