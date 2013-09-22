@@ -27,6 +27,9 @@ HELP
       when 'download'
         require 'ruby_patches_merger/revisions'
         RubyPatchesMerger::Revisions.new(args[1..-1]).save_to("patches")
+      when 'combine'
+        require 'ruby_patches_merger/combinator'
+        return RubyPatchesMerger::Combinator.new.combine("patches")
       when nil, 'help', '--help'
         help
       else
