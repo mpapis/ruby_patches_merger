@@ -20,7 +20,7 @@ module RubyPatchesMerger
           "#{@base}#{@href}&view=patch"
         end
         def content
-          "" + open(file_url).lines.to_a.join("")
+          "" + open(file_url).each_line.to_a.join("")
         end
       end
 
@@ -61,8 +61,12 @@ module RubyPatchesMerger
         puts file_path
         File.open(file_path, "w+")do |f|
           revision.each_link do |link|
-            puts "# #{link.name}"
-            f.write(link.content)
+            if %w{ChangeLog}.include? link.name
+              puts "# skipping: #{link.name}"
+            else
+              puts "# #{link.name}"
+              f.write(link.content)
+            end
           end
         end
       end
