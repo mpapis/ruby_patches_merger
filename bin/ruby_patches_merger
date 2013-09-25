@@ -5,4 +5,4 @@ $:<<lib_dir unless $:.include?(lib_dir)
 
 require 'ruby_patches_merger/cli'
 
-exit RubyPatchesMerger::Cli.run(ARGV)
+exit RubyPatchesMerger::Cli.run(ARGV) || 0 # if there was nil just return proper exit status - 0
