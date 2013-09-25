@@ -28,7 +28,7 @@ module RubyPatchesMerger
 
     def apply_patches(from)
       Dir["#{from}/*.patch"].each do |patch|
-        shell_run( "Applying: #{patch}", "(cd src/ ; patch -p 1 <../#{patch})" )
+        shell_run( "## Applying: #{patch}\n", "(cd src/ ; patch -p 1 <../#{patch})" )
       end
     end
 
