@@ -1,0 +1,7 @@
+#!/usr/bin/ruby
+
+ruby "2.0.0"
+
+source 'https://rubygems.org/'
+
+gemspec

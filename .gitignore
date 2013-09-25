@@ -1,3 +1,4 @@
 patches/
 *.gem
 combined.patch
+Gemfile.lock
