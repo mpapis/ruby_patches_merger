@@ -14,10 +14,11 @@ module RubyPatchesMerger
     def help(message = nil)
       puts message if message
       puts <<HELP
-Usage: ruby_patches_merger [download|help]
+Usage: ruby_patches_merger [download|combine|help]
 
- - download revisions,list
- - help
+ - download revisions,list - will download the given revisions to patches/
+ - combine - will get ruby source(from rvm), apply patches/* on it and build combined.patch
+ - help - show this message
 
 HELP
     end
